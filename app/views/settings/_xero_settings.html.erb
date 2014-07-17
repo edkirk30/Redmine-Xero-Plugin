@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag "xero.css", :plugin => "xero", :media => 'all' %>
+
+<div id="head" class="head">
+	<h1>Xero</h1>
+	<h2>Xero Settings</h2>
+</div>
+
+<div>
+	<p>
+		<label for="consumer_key">Consumer Key<span class="required"> *</span></label>
+		<input id="settings_consumer_key" name="settings[consumer_key]" size="60" type="text" value="<%= settings['consumer_key'] %>">
+	</p>
+	<p>
+		<label for="consumer_secret">Consumer Secret<span class="required"> *</span></label>
+		<input id="settings_consumer_secret" name="settings[consumer_secret]" size="60" type="text" value="<%= settings['consumer_secret'] %>">
+	</p>
+	<p>
+		<label for="pem_file">Private .pem file:<span class="required"> *</span></label>
+		<input id="settings_pem_file" name="settings[pem_file]" size="60" type="file" value="<%= settings['pem_file'] %>"><span><%= settings['pem_file'] %></span>
+	</p>
+</div>

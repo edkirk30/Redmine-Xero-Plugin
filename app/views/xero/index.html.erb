@@ -1,0 +1,65 @@
+<%= stylesheet_link_tag "xero.css", :plugin => "xero", :media => 'all' %>
+
+<div id="head" class="head">
+	<h1>Xero</h1>
+    <h2>Welcome to the Xero plugin</h2>
+</div>
+<p>
+Project name: <%= @project.name %>
+</p>
+
+<%= render :partial => 'client_settings', :locals => {:contacts => @contacts} %>
+
+<%= render :partial => 'search_settings' %>
+
+
+<%= form_tag( 'xero/generate_invoice', method: "post") do %>
+	<%= hidden_field_tag 'project', @project.identifier %>
+	<%= hidden_field_tag 'start', @start_date %>
+	<%= hidden_field_tag 'end', @end_date %>
+	<p>
+	Work to Invoice:
+	</p>
+	<table class="list issues features" style="width:auto">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Subject</th>
+			<th>Description</th>
+			<th>Total Spent Hours</th>
+			<th>Billable</th>
+			<th>Rate</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @billable_issues.each do |f| %>
+		<tr id="issue-<%= f[:id] %>" class="<%= cycle('odd', 'even') %> <%= f[:css_classes] %>">
+			<td class="featureid">
+				<%= f[:id] %>
+				<%= hidden_field_tag 'features[][id]', f[:id] %>
+			</td>
+			<td class="subject">
+				<%= f[:subject] %>
+				<%= hidden_field_tag 'features[][subject]', f[:subject] %>
+			</td>
+			<td class="decription">
+				<%= f[:description] %>
+				<%= hidden_field_tag 'features[][description]', f[:description] %>
+			</td>
+			<td class="hours">
+				<%= f[:total_spent_hours] %>
+				<%= hidden_field_tag 'features[][total_spent_hours]', f[:total_spent_hours] %>
+			</td>
+			<td class="billable">
+				<%= check_box_tag 'features[][billable]', 1, true %>
+			</td>
+			<td class="rate"><%= text_field_tag 'features[][rate]', number_with_precision(@xero_details.rate, :precision => 2) %>
+			</td>
+		</tr>  
+	<% end %>
+	</tbody>
+	</table>
+
+	<input type="submit"/>
+
+<% end %>
