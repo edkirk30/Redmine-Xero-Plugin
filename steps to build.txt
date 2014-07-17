@@ -1,7 +1,3 @@
-login:
-root
-caatrxqapnum
-
 cd to redmine folder (/home/redmine/redmine)
 
 to restart redmine use:

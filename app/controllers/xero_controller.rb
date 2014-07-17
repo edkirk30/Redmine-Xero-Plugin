@@ -71,7 +71,7 @@ class XeroController < ApplicationController
 	        where te.project_id = " + @project.id.to_s + "
 		    and te.invoiced = 0
 		    and te.spent_on between '" + @start_date.to_s + "' and '" + @end_date.to_s + "'
-	        and (cv.value != 'Non-billable' AND cv.value IS NOT NULL)
+	        and (cv.value AND cv.value IS NOT NULL)
 	        group by i.root_id;"
 		)
 
@@ -111,7 +111,7 @@ class XeroController < ApplicationController
 					invoice.add_line_item(:description => feature["subject"],
 									  :quantity => feature["total_spent_hours"],
 									  :unit_amount => feature["rate"],
-									  :account_code => '3100'
+									  :account_code => '200'
 									  )
 
 					query = "select te.id from time_entries te
