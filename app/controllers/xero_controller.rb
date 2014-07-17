@@ -94,7 +94,7 @@ class XeroController < ApplicationController
 								 :line_amount_types =>'Exclusive', 
 								 :contact => contact,
 								 :amount_paid => 0.0,
-								 :reference => 'My-Ref',
+								 :reference => '',
 								 :due_date => Date.today.end_of_month.end_of_day
 								)
 
